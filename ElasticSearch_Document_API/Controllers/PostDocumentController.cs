@@ -29,7 +29,7 @@ namespace ElasticSearch_Document_API.Controllers
                 await uploadedFile.CopyToAsync(memStream);
                 uploadedBase64 = Convert.ToBase64String(memStream.ToArray());
             }
-            return _documentSaver.SaveBase64Document(uploadedBase64);
+            return await _documentSaver.SaveBase64Document(uploadedBase64);
         }
     }
 }
