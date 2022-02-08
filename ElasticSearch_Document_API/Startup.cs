@@ -1,3 +1,6 @@
+using ElasticSearch_Document_API.Services;
+using ElasticSearch_Document_API.Services.Implementation;
+using ElasticSearch_Document_API.Stubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,6 +19,7 @@ namespace ElasticSearch_Document_API
 {
     public class Startup
     {
+        private bool isSwaggerEnabled = false;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,10 +32,12 @@ namespace ElasticSearch_Document_API
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ElasticSearch_Document_API", Version = "v1" });
-            });
+            if (isSwaggerEnabled)
+                services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ElasticSearch_Document_API", Version = "v1" });
+                });
+            services.AddTransient<IDocumentSaver, gRpcDocumentSaver>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,8 +46,11 @@ namespace ElasticSearch_Document_API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ElasticSearch_Document_API v1"));
+                if (isSwaggerEnabled)
+                {
+                    app.UseSwagger();
+                    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ElasticSearch_Document_API v1"));
+                }
             }
 
             app.UseHttpsRedirection();

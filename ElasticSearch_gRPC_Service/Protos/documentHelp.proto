@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "ElasticSearch_gRPC_Service";
+
+package documentHelp;
+
+service DocumentHelper {
+  rpc UploadFileToElastic (UploadFileRequest) returns (UploadFileReply);
+}
+
+message UploadFileRequest {
+  string base64Data = 1;
+}
+
+message UploadFileReply {
+  bool result = 1;
+}
