@@ -1,4 +1,5 @@
 using ElasticSearch_Document_API.Services;
+using ElasticSearch_Document_API.Services.Abstraction;
 using ElasticSearch_Document_API.Services.Implementation;
 using ElasticSearch_Document_API.Stubs;
 using Microsoft.AspNetCore.Builder;
@@ -38,6 +39,7 @@ namespace ElasticSearch_Document_API
                     c.SwaggerDoc("v1", new OpenApiInfo { Title = "ElasticSearch_Document_API", Version = "v1" });
                 });
             services.AddTransient<IDocumentSaver, gRpcDocumentSaver>();
+            services.AddTransient<IDocumentSearcher, gRpcDocumentSearcher>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

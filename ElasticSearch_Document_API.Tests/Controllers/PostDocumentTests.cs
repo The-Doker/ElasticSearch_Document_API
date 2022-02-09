@@ -35,7 +35,7 @@ namespace ElasticSearch_Document_API.Tests
             else _fakeFile = null;
 
             _mockDocumentSaver.Setup(_ => _.SaveBase64Document(It.IsAny<string>()))
-                .Returns(true);
+                .Returns(Task.FromResult(true));
 
             //Act
             var result = await _controller.Post(_fakeFile);
