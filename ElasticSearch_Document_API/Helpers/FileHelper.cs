@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace ElasticSearch_Document_API.Helpers
