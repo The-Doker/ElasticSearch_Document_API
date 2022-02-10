@@ -1,26 +1,20 @@
 using ElasticSearch_Document_API.Services;
 using ElasticSearch_Document_API.Services.Abstraction;
 using ElasticSearch_Document_API.Services.Implementation;
-using ElasticSearch_Document_API.Stubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ElasticSearch_Document_API
 {
     public class Startup
     {
         private bool isSwaggerEnabled = false;
+        const string UNENCRYPTED_SWITCH_NAME = "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -38,6 +32,8 @@ namespace ElasticSearch_Document_API
                 {
                     c.SwaggerDoc("v1", new OpenApiInfo { Title = "ElasticSearch_Document_API", Version = "v1" });
                 });
+            
+            AppContext.SetSwitch(UNENCRYPTED_SWITCH_NAME, true);
             services.AddTransient<IDocumentSaver, gRpcDocumentSaver>();
             services.AddTransient<IDocumentSearcher, gRpcDocumentSearcher>();
             services.AddTransient<IDocumentGiver, gRpcDocumentGiver>();
@@ -56,7 +52,7 @@ namespace ElasticSearch_Document_API
                 }
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

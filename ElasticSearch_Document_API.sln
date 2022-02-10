@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElasticSearch_Document_API.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElasticSearch_gRPC_Service", "ElasticSearch_gRPC_Service\ElasticSearch_gRPC_Service.csproj", "{E4CB9BFC-19C4-4B5A-9DDF-2A491078B775}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch_gRPC_Service.Tests", "ElasticSearch_gRPC_Service.Tests\ElasticSearch_gRPC_Service.Tests.csproj", "{CE8D5F39-08DB-4FA4-9494-C13CA8909CA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElasticSearch_gRPC_Service.Tests", "ElasticSearch_gRPC_Service.Tests\ElasticSearch_gRPC_Service.Tests.csproj", "{CE8D5F39-08DB-4FA4-9494-C13CA8909CA9}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{54195E5A-BE6F-414B-8E13-BDC3FBB5956C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{CE8D5F39-08DB-4FA4-9494-C13CA8909CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE8D5F39-08DB-4FA4-9494-C13CA8909CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE8D5F39-08DB-4FA4-9494-C13CA8909CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54195E5A-BE6F-414B-8E13-BDC3FBB5956C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54195E5A-BE6F-414B-8E13-BDC3FBB5956C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54195E5A-BE6F-414B-8E13-BDC3FBB5956C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54195E5A-BE6F-414B-8E13-BDC3FBB5956C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

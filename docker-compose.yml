@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  elasticsearch_document_api:
+    image: ${DOCKER_REGISTRY-}elasticsearchdocumentapi
+    ports:
+      - "5003:5003"
+    build:
+      context: .
+      dockerfile: ElasticSearch_Document_API/Dockerfile
+  elasticsearch_grpc_service:
+    image: ${DOCKER_REGISTRY-}elasticsearchgrpcservice
+    ports:
+      - "5000:5000"
+    build:
+      context: .
+      dockerfile: ElasticSearch_gRPC_Service/Dockerfile

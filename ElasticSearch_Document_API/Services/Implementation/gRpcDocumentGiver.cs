@@ -10,7 +10,7 @@ namespace ElasticSearch_Document_API.Services.Implementation
     {
         public async Task<FileModel> GetDocumentFromSavedFiles(string documentId)
         {
-            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            using var channel = GrpcChannel.ForAddress("http://localhost:5000");
             var grpcClient = new DocumentHelper.DocumentHelperClient(channel);
             var replyFromGrpc = await grpcClient.DownloadFileFromElasticAsync(new FileDownloadRequest { DocumentId = documentId });
             return new FileModel()

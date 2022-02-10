@@ -8,7 +8,7 @@ namespace ElasticSearch_Document_API.Services.Implementation
     {
         public async Task<bool> SaveBase64Document(string doc)
         {
-            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            using var channel = GrpcChannel.ForAddress("http://localhost:5000");
             var grpcClient = new DocumentHelper.DocumentHelperClient(channel);
             var replyFromGrpc = await grpcClient.UploadFileToElasticAsync(new UploadFileRequest { Base64Data = doc });
             return replyFromGrpc.Result;
