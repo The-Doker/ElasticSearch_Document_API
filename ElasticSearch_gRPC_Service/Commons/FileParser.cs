@@ -1,5 +1,4 @@
 ﻿using ElasticSearch_gRPC_Service.Models;
-using System.Collections.Generic;
 
 namespace ElasticSearch_gRPC_Service.Commons
 {

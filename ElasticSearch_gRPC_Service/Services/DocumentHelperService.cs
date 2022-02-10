@@ -1,17 +1,6 @@
 using ElasticSearch_gRPC_Service.Commons;
-using ElasticSearch_gRPC_Service.Models;
 using Grpc.Core;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace ElasticSearch_gRPC_Service

@@ -8,7 +8,8 @@ namespace ElasticSearch_gRPC_Service.Dictionaries
         {
             ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"] = "docx",
             ["application/msword"] = "doc",
-            ["application/pdf"] = "pdf"
+            ["application/pdf"] = "pdf",
+            ["application/rtf"] = "rtf"
         };
     }
 }

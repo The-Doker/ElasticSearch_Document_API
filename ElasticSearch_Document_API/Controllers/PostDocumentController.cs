@@ -1,10 +1,9 @@
-﻿using ElasticSearch_Document_API.Helpers;
+﻿using ElasticSearch_Document_API.Data;
+using ElasticSearch_Document_API.Helpers;
 using ElasticSearch_Document_API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,12 +18,24 @@ namespace ElasticSearch_Document_API.Controllers
         {
             _documentSaver = documentSaver;
         }
-        public async Task<bool> Post([FromForm] IFormFile uploadedFile)
+
+        public async Task<IActionResult> Post([FromForm] IFormFile uploadedFile)
         {
-            if (uploadedFile == null)
-                return false;
-            var uploadedBase64 = await FileHelper.ConvertToBase64(uploadedFile);
-            return await _documentSaver.SaveBase64Document(uploadedBase64);
+            try
+            {
+                if (!AllowedExtensions.AllowedExtensionsList.Any(System.IO.Path.GetExtension(uploadedFile.FileName).Contains))
+                    return StatusCode(400);
+
+                var uploadedBase64 = await FileHelper.ConvertToBase64(uploadedFile);
+                var result = await _documentSaver.SaveBase64Document(uploadedBase64);
+                if (result)
+                    return Ok();
+                else return StatusCode(500);
+            } 
+            catch
+            {
+                return StatusCode(500);
+            }
         }
     }
 }
