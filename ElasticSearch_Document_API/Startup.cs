@@ -14,7 +14,7 @@ namespace ElasticSearch_Document_API
     public class Startup
     {
         private bool isSwaggerEnabled = false;
-        const string UNENCRYPTED_SWITCH_NAME = "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport";
+        private const string UNENCRYPTED_SWITCH_NAME = "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

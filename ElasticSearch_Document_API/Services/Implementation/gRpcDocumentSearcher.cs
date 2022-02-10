@@ -9,7 +9,7 @@ namespace ElasticSearch_Document_API.Services.Implementation
     {
         public async Task<string> FindInSavedDocuments(string searchQuery)
         {
-            using var channel = GrpcChannel.ForAddress("http://localhost:5000");
+            using var channel = GrpcChannel.ForAddress("http://elasticgrpc:5000");
             var grpcClient = new DocumentHelper.DocumentHelperClient(channel);
             var replyFromGrpc = await grpcClient.FindFileInElasticAsync(new FileSearchRequest { Query = searchQuery });
             return replyFromGrpc.JsonData;

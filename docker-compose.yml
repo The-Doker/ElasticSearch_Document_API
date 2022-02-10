@@ -1,17 +1,31 @@
 version: '3.4'
 
 services:
-  elasticsearch_document_api:
-    image: ${DOCKER_REGISTRY-}elasticsearchdocumentapi
+  elasticsearch:
+    container_name: elasticsearchplugin
+    image: ${DOCKER_REGISTRY-}elasticsearch_with_ingest
     ports:
-      - "5003:5003"
-    build:
-      context: .
-      dockerfile: ElasticSearch_Document_API/Dockerfile
+      - "9200:9200"
+      - "9300:9300"
   elasticsearch_grpc_service:
+    container_name: elasticgrpc
     image: ${DOCKER_REGISTRY-}elasticsearchgrpcservice
     ports:
       - "5000:5000"
+    depends_on:
+      - elasticsearch
     build:
       context: .
       dockerfile: ElasticSearch_gRPC_Service/Dockerfile
+  elasticsearch_document_api:
+    container_name: elasticapi
+    image: ${DOCKER_REGISTRY-}elasticsearchdocumentapi
+    ports:
+      - "5003:5003"
+    depends_on:
+      - elasticsearch_grpc_service
+      - elasticsearch
+    build:
+      context: .
+      dockerfile: ElasticSearch_Document_API/Dockerfile
+  
