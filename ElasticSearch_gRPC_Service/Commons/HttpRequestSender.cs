@@ -33,5 +33,22 @@ namespace ElasticSearch_gRPC_Service.Commons
                 var result = httpClient.PostAsync(url, content).Result;
             }
         }
+
+        public static HttpResponseMessage SendDownloadRequestToElastic(string searchId)
+        {
+            HttpResponseMessage response = null;
+            using (var httpClient = new HttpClient())
+            {
+
+                string url = $"http://localhost:9200/documenthelper/_search";
+                string body = @"{""query"":{""term"":{""_id"":""" + 
+                    searchId + 
+                    @"""}},""_source"":{""excludes"":[""attachment.content""]}}";
+
+                var content = new StringContent(body, Encoding.UTF8, "application/json");
+                response = httpClient.PostAsync(url, content).Result;
+            }
+            return response;
+        }
     }
 }

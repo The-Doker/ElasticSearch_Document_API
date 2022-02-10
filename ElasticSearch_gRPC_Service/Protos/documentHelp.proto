@@ -7,6 +7,7 @@ package documentHelp;
 service DocumentHelper {
   rpc UploadFileToElastic (UploadFileRequest) returns (UploadFileReply);
   rpc FindFileInElastic (FileSearchRequest) returns (FileSearchReply);
+  rpc DownloadFileFromElastic (FileDownloadRequest) returns (FileDownloadReply);
 }
 
 message UploadFileRequest {
@@ -23,4 +24,14 @@ message FileSearchRequest {
 
 message FileSearchReply {
 	string jsonData = 1;
+}
+
+message FileDownloadRequest {
+	string documentId = 1;
+}
+
+message FileDownloadReply {
+	string documentBase64 = 1;
+	string documentName = 2;
+	string documentType = 3;
 }

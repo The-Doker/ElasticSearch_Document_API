@@ -24,12 +24,12 @@ namespace ElasticSearch_Document_API.Controllers
             _documentGiver = documentGiver;
         }
         [HttpGet]
-        public async Task<HttpResponseMessage> Get([FromForm] string documentId)
+        public async Task<FileContentResult> Get(string documentId)
         {
             var responseFromElastic = await _documentGiver.GetDocumentFromSavedFiles(documentId);
-            //Нужно заменить fileName
-            var result = FileHelper.MakeHttpResponceFromBase64(responseFromElastic, "file.pdf");
-            return result;
+            return File(Convert.FromBase64String(responseFromElastic.DataBase64), 
+                "application/octet-stream", 
+                responseFromElastic.Name + "." + responseFromElastic.Type);
         }
     }
 }

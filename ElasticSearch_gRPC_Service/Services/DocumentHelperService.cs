@@ -39,5 +39,13 @@ namespace ElasticSearch_gRPC_Service
                 JsonData = JsonConvert.SerializeObject(documentsHighlights)
             };
         }
+
+        public override async Task<FileDownloadReply> DownloadFileFromElastic(FileDownloadRequest request, ServerCallContext context)
+        {
+            var responseFromElastic = HttpRequestSender.SendDownloadRequestToElastic(request.DocumentId);
+            var recievedDocuments = await ElasticReplyParser.ParseElasticReplyToJson(responseFromElastic);
+            var fileFromElastic = FileParser.ParseFileFromDocuments(recievedDocuments[0]);
+            return fileFromElastic;
+        }
     }
 }
