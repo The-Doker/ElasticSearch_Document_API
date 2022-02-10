@@ -1,4 +1,5 @@
-﻿using ElasticSearch_Document_API.Services;
+﻿using ElasticSearch_Document_API.Helpers;
+using ElasticSearch_Document_API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,15 +21,9 @@ namespace ElasticSearch_Document_API.Controllers
         }
         public async Task<bool> Post([FromForm] IFormFile uploadedFile)
         {
-            string uploadedBase64;
-
             if (uploadedFile == null)
                 return false;
-            using (var memStream = new MemoryStream())
-            {
-                await uploadedFile.CopyToAsync(memStream);
-                uploadedBase64 = Convert.ToBase64String(memStream.ToArray());
-            }
+            var uploadedBase64 = await FileHelper.ConvertToBase64(uploadedFile);
             return await _documentSaver.SaveBase64Document(uploadedBase64);
         }
     }

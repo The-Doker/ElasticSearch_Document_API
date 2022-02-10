@@ -40,6 +40,7 @@ namespace ElasticSearch_Document_API
                 });
             services.AddTransient<IDocumentSaver, gRpcDocumentSaver>();
             services.AddTransient<IDocumentSearcher, gRpcDocumentSearcher>();
+            services.AddTransient<IDocumentGiver, DocumentGiverStub>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
