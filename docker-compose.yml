@@ -3,13 +3,13 @@ version: '3.4'
 services:
   elasticsearch:
     container_name: elasticsearchplugin
-    image: ${DOCKER_REGISTRY-}elasticsearch_with_ingest
+    image: ultimatedoker/elasticsearch_with_ingest
     ports:
       - "9200:9200"
       - "9300:9300"
   elasticsearch_grpc_service:
     container_name: elasticgrpc
-    image: ${DOCKER_REGISTRY-}elasticsearchgrpcservice
+    image: ultimatedoker/elasticsearchgrpcservice
     ports:
       - "5000:5000"
     depends_on:
@@ -19,7 +19,7 @@ services:
       dockerfile: ElasticSearch_gRPC_Service/Dockerfile
   elasticsearch_document_api:
     container_name: elasticapi
-    image: ${DOCKER_REGISTRY-}elasticsearchdocumentapi
+    image: ultimatedoker/elasticsearchdocumentapi
     ports:
       - "5003:5003"
     depends_on:

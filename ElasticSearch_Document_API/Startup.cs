@@ -1,6 +1,7 @@
 using ElasticSearch_Document_API.Services;
 using ElasticSearch_Document_API.Services.Abstraction;
 using ElasticSearch_Document_API.Services.Implementation;
+using ElasticSearch_gRPC_Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,10 @@ namespace ElasticSearch_Document_API
                 });
             
             AppContext.SetSwitch(UNENCRYPTED_SWITCH_NAME, true);
+            services.AddGrpcClient<DocumentHelper.DocumentHelperClient>(_ =>
+            {
+                _.Address = new Uri("http://elasticgrpc:5000");
+            });
             services.AddTransient<IDocumentSaver, gRpcDocumentSaver>();
             services.AddTransient<IDocumentSearcher, gRpcDocumentSearcher>();
             services.AddTransient<IDocumentGiver, gRpcDocumentGiver>();

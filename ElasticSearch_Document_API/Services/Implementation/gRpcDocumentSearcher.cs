@@ -7,11 +7,16 @@ namespace ElasticSearch_Document_API.Services.Implementation
 {
     public class gRpcDocumentSearcher : IDocumentSearcher
     {
+        private readonly DocumentHelper.DocumentHelperClient _client;
+        
+        public gRpcDocumentSearcher(DocumentHelper.DocumentHelperClient client)
+        {
+            _client = client;
+        }
+
         public async Task<string> FindInSavedDocuments(string searchQuery)
         {
-            using var channel = GrpcChannel.ForAddress("http://elasticgrpc:5000");
-            var grpcClient = new DocumentHelper.DocumentHelperClient(channel);
-            var replyFromGrpc = await grpcClient.FindFileInElasticAsync(new FileSearchRequest { Query = searchQuery });
+            var replyFromGrpc = await _client.FindFileInElasticAsync(new FileSearchRequest { Query = searchQuery });
             return replyFromGrpc.JsonData;
         }
     }

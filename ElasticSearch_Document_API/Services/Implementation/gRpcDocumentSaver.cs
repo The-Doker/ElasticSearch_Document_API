@@ -6,11 +6,16 @@ namespace ElasticSearch_Document_API.Services.Implementation
 {
     public class gRpcDocumentSaver : IDocumentSaver
     {
+        private readonly DocumentHelper.DocumentHelperClient _client;
+
+        public gRpcDocumentSaver(DocumentHelper.DocumentHelperClient client)
+        {
+            _client = client;
+        }
+
         public async Task<bool> SaveBase64Document(string doc)
         {
-            using var channel = GrpcChannel.ForAddress("http://elasticgrpc:5000");
-            var grpcClient = new DocumentHelper.DocumentHelperClient(channel);
-            var replyFromGrpc = await grpcClient.UploadFileToElasticAsync(new UploadFileRequest { Base64Data = doc });
+            var replyFromGrpc = await _client.UploadFileToElasticAsync(new UploadFileRequest { Base64Data = doc });
             return replyFromGrpc.Result;
         }
     }

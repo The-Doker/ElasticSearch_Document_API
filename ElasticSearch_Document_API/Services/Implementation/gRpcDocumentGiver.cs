@@ -8,11 +8,16 @@ namespace ElasticSearch_Document_API.Services.Implementation
 {
     public class gRpcDocumentGiver : IDocumentGiver
     {
+        private readonly DocumentHelper.DocumentHelperClient _client;
+
+        public gRpcDocumentGiver(DocumentHelper.DocumentHelperClient client)
+        {
+            _client = client;
+        }
+
         public async Task<FileModel> GetDocumentFromSavedFiles(string documentId)
         {
-            using var channel = GrpcChannel.ForAddress("http://elasticgrpc:5000");
-            var grpcClient = new DocumentHelper.DocumentHelperClient(channel);
-            var replyFromGrpc = await grpcClient.DownloadFileFromElasticAsync(new FileDownloadRequest { DocumentId = documentId });
+            var replyFromGrpc = await _client.DownloadFileFromElasticAsync(new FileDownloadRequest { DocumentId = documentId });
             return new FileModel()
             {
                 DataBase64 = replyFromGrpc.DocumentBase64,

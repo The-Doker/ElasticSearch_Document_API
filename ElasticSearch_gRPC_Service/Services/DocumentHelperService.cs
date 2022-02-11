@@ -10,7 +10,6 @@ namespace ElasticSearch_gRPC_Service
         public override Task<UploadFileReply> UploadFileToElastic(UploadFileRequest request, ServerCallContext context)
         {
             HttpRequestSender.SendFileToElastic(request.Base64Data);
-
             return Task.FromResult(new UploadFileReply
             {
                 Result = true

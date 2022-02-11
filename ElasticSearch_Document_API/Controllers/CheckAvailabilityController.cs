@@ -12,7 +12,7 @@ namespace ElasticSearch_Document_API.Controllers
     public class CheckAvailabilityController : ControllerBase
     {
         [HttpGet]
-        public HttpResponseMessage Get()
+        public IActionResult Get()
         {
             HttpResponseMessage response;
             using (var httpClient = new HttpClient())
@@ -25,7 +25,9 @@ namespace ElasticSearch_Document_API.Controllers
                 var content = new StringContent(body, Encoding.UTF8, "application/json");
                 response = httpClient.PostAsync(url, content).Result;
             }
-            return response;
+            if (response != null)
+                return Ok("It's working");
+            return StatusCode(500);
         }
     }
 }
