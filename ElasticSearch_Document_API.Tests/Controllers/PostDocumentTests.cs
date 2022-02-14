@@ -1,6 +1,7 @@
 using ElasticSearch_Document_API.Controllers;
 using ElasticSearch_Document_API.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using System.IO;
@@ -38,10 +39,12 @@ namespace ElasticSearch_Document_API.Tests
                 .Returns(Task.FromResult(true));
 
             //Act
-            var result = await _controller.Post(_fakeFile);
+            var result = (StatusCodeResult) await _controller.Post(_fakeFile);
 
             //Assert
-            Assert.AreEqual(shouldBeCorrectFile, result);
+            if (shouldBeCorrectFile)
+                Assert.AreEqual(200, result.StatusCode);
+            else Assert.AreEqual(500, result.StatusCode);
         }
 
         private MemoryStream CreateStreamForFakeFile(string content)
