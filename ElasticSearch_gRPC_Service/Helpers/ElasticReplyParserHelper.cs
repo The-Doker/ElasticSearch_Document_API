@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ElasticSearch_gRPC_Service.Commons
 {
-    public static class ElasticReplyParser
+    public static class ElasticReplyParserHelper
     {
         public static async Task<List<Hit>> ParseElasticReplyToJson(HttpResponseMessage elasticReply)
         {

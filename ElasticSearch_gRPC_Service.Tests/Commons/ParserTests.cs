@@ -26,7 +26,7 @@ namespace ElasticSearch_gRPC_Service.Tests
             };
 
             //Act
-            var result = await ElasticReplyParser.ParseElasticReplyToJson(_fakeResponse);
+            var result = await ElasticReplyParserHelper.ParseElasticReplyToJson(_fakeResponse);
 
             //Assert
             Assert.AreEqual(_expectedBodyOfResponse, result[0].Highlight.AttachmentContent[0]);
@@ -40,10 +40,10 @@ namespace ElasticSearch_gRPC_Service.Tests
             {
                 Content = new ByteArrayContent(Encoding.UTF8.GetBytes(_jsonResponseFromElastic))
             };
-            var parsedResponseFromElastic = await ElasticReplyParser.ParseElasticReplyToJson(_fakeResponse);
+            var parsedResponseFromElastic = await ElasticReplyParserHelper.ParseElasticReplyToJson(_fakeResponse);
 
             //Act
-            var result = FileParser.ParseFileFromDocuments(parsedResponseFromElastic[0]);
+            var result = FileParserHelper.ParseFileFromDocuments(parsedResponseFromElastic[0]);
 
             //Assert
             Assert.AreEqual(_expectedTitleOfDocument, result.DocumentName);
@@ -57,10 +57,10 @@ namespace ElasticSearch_gRPC_Service.Tests
             {
                 Content = new ByteArrayContent(Encoding.UTF8.GetBytes(_jsonResponseFromElastic))
             };
-            var parsedResponseFromElastic = await ElasticReplyParser.ParseElasticReplyToJson(_fakeResponse);
+            var parsedResponseFromElastic = await ElasticReplyParserHelper.ParseElasticReplyToJson(_fakeResponse);
 
             //Act
-            var result = HighlightsParser.ParseHighlightsFromDocuments(parsedResponseFromElastic);
+            var result = HighlightsParserHelper.ParseHighlightsFromDocuments(parsedResponseFromElastic);
 
             //Assert
             Assert.AreEqual(_expectedIdOfDocument, result[0].Id);

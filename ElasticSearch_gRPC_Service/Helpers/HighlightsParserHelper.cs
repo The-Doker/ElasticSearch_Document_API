@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ElasticSearch_gRPC_Service.Commons
 {
-    public static class HighlightsParser
+    public static class HighlightsParserHelper
     {
         public static List<DocumentSearchResultModel> ParseHighlightsFromDocuments(List<Hit> documents)
         {

@@ -14,20 +14,27 @@ namespace ElasticSearch_Document_API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            HttpResponseMessage response;
-            using (var httpClient = new HttpClient())
+            try
             {
-                string url = $"http://elasticsearchplugin:9200/documenthelper/_search";
-                string body = @"{""query"":{""multi_match"":{""query"":""" +
-                    "VPN"
-                    + @""",""fields"":[""attachment.content"",""attachment.author"",""attachment.title""]}},""_source"":{""excludes"": [""attachment.content""]},""highlight"":{""fields"":{""attachment.content"":{""number_of_fragments"":10,""fragment_size"":300}}}}";
+                HttpResponseMessage response;
+                using (var httpClient = new HttpClient())
+                {
+                    string url = $"http://elasticsearchplugin:9200/documenthelper/_search";
+                    string body = @"{""query"":{""multi_match"":{""query"":""" +
+                        "VPN"
+                        + @""",""fields"":[""attachment.content"",""attachment.author"",""attachment.title""]}},""_source"":{""excludes"": [""attachment.content""]},""highlight"":{""fields"":{""attachment.content"":{""number_of_fragments"":10,""fragment_size"":300}}}}";
 
-                var content = new StringContent(body, Encoding.UTF8, "application/json");
-                response = httpClient.PostAsync(url, content).Result;
+                    var content = new StringContent(body, Encoding.UTF8, "application/json");
+                    response = httpClient.PostAsync(url, content).Result;
+                }
+                if (response != null)
+                    return Ok("It's working");
+                return Ok("It's not working");
             }
-            if (response != null)
-                return Ok("It's working");
-            return StatusCode(500);
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

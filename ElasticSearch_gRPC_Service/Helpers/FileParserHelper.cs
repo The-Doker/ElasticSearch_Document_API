@@ -2,7 +2,7 @@
 
 namespace ElasticSearch_gRPC_Service.Commons
 {
-    public class FileParser
+    public class FileParserHelper
     {
         public static FileDownloadReply ParseFileFromDocuments(Hit document)
         {
