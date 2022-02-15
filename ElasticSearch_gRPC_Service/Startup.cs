@@ -1,5 +1,6 @@
 ﻿using ElasticSearch_gRPC_Service.Commons;
 using ElasticSearch_gRPC_Service.Configs;
+using ElasticSearch_gRPC_Service.Interceptors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,7 +28,11 @@ namespace ElasticSearch_gRPC_Service
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddGrpc();
+            services.AddGrpc(options =>
+            {
+                options.Interceptors.Add<GlobalExceptionsInterceptor>();
+                options.EnableDetailedErrors = true;
+            });
             services.AddTransient<IElasticClient, ElasticClient>();
             services.Configure<ElasticWebSettings>(Configuration);
             services.AddHttpClient();

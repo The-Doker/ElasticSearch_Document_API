@@ -1,3 +1,4 @@
+using ElasticSearch_Document_API.Middlewares;
 using ElasticSearch_Document_API.Services;
 using ElasticSearch_Document_API.Services.Abstraction;
 using ElasticSearch_Document_API.Services.Implementation;
@@ -47,6 +48,7 @@ namespace ElasticSearch_Document_API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
