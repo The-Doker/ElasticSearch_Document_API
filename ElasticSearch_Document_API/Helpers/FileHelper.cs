@@ -10,11 +10,9 @@ namespace ElasticSearch_Document_API.Helpers
         public async static Task<string> ConvertToBase64(IFormFile uploadedFile)
         {
             string uploadedBase64;
-            using (var memStream = new MemoryStream())
-            {
-                await uploadedFile.CopyToAsync(memStream);
-                uploadedBase64 = Convert.ToBase64String(memStream.ToArray());
-            }
+            using var memStream = new MemoryStream();
+            await uploadedFile.CopyToAsync(memStream);
+            uploadedBase64 = Convert.ToBase64String(memStream.ToArray());
             return uploadedBase64;
         }
 

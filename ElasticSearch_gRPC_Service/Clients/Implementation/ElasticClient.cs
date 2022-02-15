@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ElasticSearch_gRPC_Service.Commons
 {
@@ -18,7 +19,7 @@ namespace ElasticSearch_gRPC_Service.Commons
             _httpClientFactory = httpClientFactory;
             _logger = logger;
         }
-        public HttpResponseMessage SendSearchRequestToElastic(string searchQuery)
+        public async Task<HttpResponseMessage> SendSearchRequestToElasticAsync(string searchQuery)
         {
             _logger.LogInformation("Получен запрос на выполнение поиска в ElasticSearch");
             var httpClient = _httpClientFactory.CreateClient();
@@ -28,23 +29,24 @@ namespace ElasticSearch_gRPC_Service.Commons
                 + @""",""fields"":[""attachment.content"",""attachment.author"",""attachment.title""]}},""_source"":{""excludes"": [""attachment.content""]},""highlight"":{""fields"":{""attachment.content"":{""number_of_fragments"":10,""fragment_size"":300}}}}";
 
             var content = new StringContent(body, Encoding.UTF8, "application/json");
-            var response = httpClient.PostAsync(url, content).Result;
+            var response = await httpClient.PostAsync(url, content);
             _logger.LogInformation("Получен ответ от ElasticSearch");
             return response;
         }
 
-        public void SendFileToElastic(string dataInBase64)
+        public async Task<HttpResponseMessage> SendFileToElasticAsync(string dataInBase64)
         {
             _logger.LogInformation("Получен запрос на отправку файла в ElasticSearch");
             var httpClient = _httpClientFactory.CreateClient();
             string url = _elasticWebSettings.ElasticAddress + "_doc?pipeline=attachment";
             string body = "{ \"data\": \"" + dataInBase64 + "\" }";
             var content = new StringContent(body, Encoding.UTF8, "application/json");
-            _ = httpClient.PostAsync(url, content).Result;
+            var result = await httpClient.PostAsync(url, content);
             _logger.LogInformation("Получен ответ от ElasticSearch");
+            return result;
         }
 
-        public HttpResponseMessage SendDownloadRequestToElastic(string searchId)
+        public async Task<HttpResponseMessage> SendDownloadRequestToElasticAsync(string searchId)
         {
             _logger.LogInformation("Получен запрос на загрузку файла из ElasticSearch");
             var httpClient = _httpClientFactory.CreateClient();
@@ -53,7 +55,7 @@ namespace ElasticSearch_gRPC_Service.Commons
                 searchId +
                 @"""}},""_source"":{""excludes"":[""attachment.content""]}}";
             var content = new StringContent(body, Encoding.UTF8, "application/json");
-            var response = httpClient.PostAsync(url, content).Result;
+            var response = await httpClient.PostAsync(url, content);
             _logger.LogInformation("Получен ответ от ElasticSearch");
             return response;
         }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ElasticSearch_Document_API.Controllers
@@ -24,17 +25,17 @@ namespace ElasticSearch_Document_API.Controllers
             try
             {
                 if (!AllowedExtensions.AllowedExtensionsList.Any(System.IO.Path.GetExtension(uploadedFile.FileName).Contains))
-                    return StatusCode(400);
+                    return StatusCode((int)HttpStatusCode.BadRequest);
 
                 var uploadedBase64 = await FileHelper.ConvertToBase64(uploadedFile);
                 var result = await _documentSaver.SaveBase64Document(uploadedBase64);
                 if (result)
                     return Ok();
-                else return StatusCode(500);
+                else return StatusCode((int)HttpStatusCode.InternalServerError);
             } 
             catch
             {
-                return StatusCode(500);
+                return StatusCode((int)HttpStatusCode.InternalServerError);
             }
         }
     }

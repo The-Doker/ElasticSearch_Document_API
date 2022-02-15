@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Core.Interceptors;
 using Microsoft.Extensions.Logging;
-
 namespace ElasticSearch_gRPC_Service.Interceptors
 {
     public class GlobalExceptionsInterceptor : Interceptor
@@ -22,7 +22,12 @@ namespace ElasticSearch_gRPC_Service.Interceptors
         {
             try
             {
-                return await continuation(request, context);
+                _logger.LogInformation($"{Environment.NewLine}GRPC Request{Environment.NewLine}Method: {context.Method}{Environment.NewLine}" +
+                    $"Data: {JsonSerializer.Serialize(request)}");
+                var serverResponse = await continuation(request, context);
+                _logger.LogInformation($"{Environment.NewLine}GRPC Response{Environment.NewLine}Method: {context.Method}{Environment.NewLine}" +
+                    $"Data: {JsonSerializer.Serialize(serverResponse)}");
+                return serverResponse;
             }
             catch (Exception ex)
             {
