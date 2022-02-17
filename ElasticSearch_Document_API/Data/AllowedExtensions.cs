@@ -9,7 +9,8 @@ namespace ElasticSearch_Document_API.Data
             "doc",
             "docx",
             "pdf",
-            "rtf"
+            "rtf",
+            "xml"
         };
     }
 }
