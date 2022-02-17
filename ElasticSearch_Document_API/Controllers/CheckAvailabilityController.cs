@@ -1,6 +1,7 @@
 ﻿using ElasticSearch_Document_API.Services.Abstraction;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,17 @@ namespace ElasticSearch_Document_API.Controllers
     [Route("[controller]")]
     public class CheckAvailabilityController : ControllerBase
     {
+        /*
+        [HttpGet]
+        public async void Get()
+        {
+            ServiceReference1.Service1Client client = new ServiceReference1.Service1Client();
+            string[] returnString;
+
+            returnString = await client.GetDataAsync(2);
+            var s = returnString;
+        }*/
+
         [HttpGet]
         public IActionResult Get()
         {

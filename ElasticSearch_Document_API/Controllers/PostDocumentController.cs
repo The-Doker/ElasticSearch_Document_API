@@ -24,7 +24,10 @@ namespace ElasticSearch_Document_API.Controllers
         {
             try
             {
-                if (!AllowedExtensions.AllowedExtensionsList.Any(System.IO.Path.GetExtension(uploadedFile.FileName).Contains))
+                ServiceReference1.Service1Client client = new ServiceReference1.Service1Client();
+                var wcfStrings = await client.GetDataAsync(0);
+
+                if (!wcfStrings.Any(System.IO.Path.GetExtension(uploadedFile.FileName).Contains))
                     return StatusCode((int)HttpStatusCode.BadRequest);
 
                 var uploadedBase64 = await FileHelper.ConvertToBase64(uploadedFile);
