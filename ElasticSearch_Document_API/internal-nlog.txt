@@ -138,3 +138,19 @@
 2022-02-17 18:08:24.0492 Info Validating config: TargetNames=allfile, ownFile-web, ConfigItems=45, FilePath=C:\Users\ITQ\source\repos\ElasticSearch_Document_API\ElasticSearch_Document_API\bin\Debug\net5.0\NLog.config
 2022-02-17 18:08:24.0664 Info Configuration initialized.
 2022-02-17 18:08:24.0664 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.11.13229. Product version: 4.7.11+33ed3a9f86277651e93ddf39cda64a046a06778b. GlobalAssemblyCache: False
+2022-02-17 18:31:38.0424 Info Message Template Auto Format enabled
+2022-02-17 18:31:38.0725 Info Loading assembly: NLog.Web.AspNetCore
+2022-02-17 18:31:38.1176 Info Adding target FileTarget(Name=allfile)
+2022-02-17 18:31:38.1176 Info Adding target FileTarget(Name=ownFile-web)
+2022-02-17 18:31:38.1476 Info Validating config: TargetNames=allfile, ownFile-web, ConfigItems=45, FilePath=C:\Users\ITQ\source\repos\ElasticSearch_Document_API\ElasticSearch_Document_API\bin\Debug\net5.0\NLog.config
+2022-02-17 18:31:38.1635 Info Configuration initialized.
+2022-02-17 18:31:38.1635 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.11.13229. Product version: 4.7.11+33ed3a9f86277651e93ddf39cda64a046a06778b. GlobalAssemblyCache: False
+2022-02-17 18:31:53.4460 Info AppDomain Shutting down. Logger closing...
+2022-02-17 18:31:53.4644 Info Logger has been shut down.
+2022-02-17 18:32:13.7277 Info Message Template Auto Format enabled
+2022-02-17 18:32:13.8642 Info Loading assembly: NLog.Web.AspNetCore
+2022-02-17 18:32:14.0399 Info Adding target FileTarget(Name=allfile)
+2022-02-17 18:32:14.0399 Info Adding target FileTarget(Name=ownFile-web)
+2022-02-17 18:32:14.0651 Info Validating config: TargetNames=allfile, ownFile-web, ConfigItems=45, FilePath=C:\Users\ITQ\source\repos\ElasticSearch_Document_API\ElasticSearch_Document_API\bin\Debug\net5.0\NLog.config
+2022-02-17 18:32:14.1250 Info Configuration initialized.
+2022-02-17 18:32:14.1250 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.7.11.13229. Product version: 4.7.11+33ed3a9f86277651e93ddf39cda64a046a06778b. GlobalAssemblyCache: False
