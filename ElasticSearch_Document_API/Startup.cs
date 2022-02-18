@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using System.ServiceModel;
 
 namespace ElasticSearch_Document_API
 {
@@ -38,11 +39,23 @@ namespace ElasticSearch_Document_API
             AppContext.SetSwitch(UNENCRYPTED_SWITCH_NAME, true);
             services.AddGrpcClient<DocumentHelper.DocumentHelperClient>(_ =>
             {
-                _.Address = new Uri("http://elasticgrpc:5000");
+                _.Address = new Uri(Configuration["Enviroments:GRPC_ADDRESS"]);
             });
             services.AddTransient<IDocumentSaver, gRpcDocumentSaver>();
             services.AddTransient<IDocumentSearcher, gRpcDocumentSearcher>();
             services.AddTransient<IDocumentGiver, gRpcDocumentGiver>();
+            services.AddTransient( _ =>
+            {
+                var binding = new WSHttpBinding()
+                {
+                    Name = "WcfTypesService"
+                };
+                binding.Security.Mode = SecurityMode.TransportWithMessageCredential;
+                var endpoint = new EndpointAddress(Configuration["Enviroments:GETTYPES_ADDRESS"]);
+                
+                return new GetDataService.GetDataServiceClient(binding, endpoint);
+            }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

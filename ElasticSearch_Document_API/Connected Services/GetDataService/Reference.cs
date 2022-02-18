@@ -7,27 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceReference1
+namespace GetDataService
 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
-    public interface IService1
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IGetDataService")]
+    public interface IGetDataService
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
-        System.Threading.Tasks.Task<string[]> GetDataAsync(int value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetDataService/GetData", ReplyAction="http://tempuri.org/IGetDataService/GetDataResponse")]
+        System.Threading.Tasks.Task<string[]> GetDataAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
-    public interface IService1Channel : ServiceReference1.IService1, System.ServiceModel.IClientChannel
+    public interface IGetDataServiceChannel : GetDataService.IGetDataService, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
-    public partial class Service1Client : System.ServiceModel.ClientBase<ServiceReference1.IService1>, ServiceReference1.IService1
+    public partial class GetDataServiceClient : System.ServiceModel.ClientBase<GetDataService.IGetDataService>, GetDataService.IGetDataService
     {
         
         /// <summary>
@@ -37,42 +37,42 @@ namespace ServiceReference1
         /// <param name="clientCredentials">Учетные данные клиента.</param>
         static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
         
-        public Service1Client() : 
-                base(Service1Client.GetDefaultBinding(), Service1Client.GetDefaultEndpointAddress())
+        public GetDataServiceClient() : 
+                base(GetDataServiceClient.GetDefaultBinding(), GetDataServiceClient.GetDefaultEndpointAddress())
         {
-            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IService1.ToString();
+            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IGetDataService.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Service1Client(EndpointConfiguration endpointConfiguration) : 
-                base(Service1Client.GetBindingForEndpoint(endpointConfiguration), Service1Client.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public Service1Client(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
-                base(Service1Client.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        public GetDataServiceClient(EndpointConfiguration endpointConfiguration) : 
+                base(GetDataServiceClient.GetBindingForEndpoint(endpointConfiguration), GetDataServiceClient.GetEndpointAddress(endpointConfiguration))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Service1Client(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(Service1Client.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        public GetDataServiceClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(GetDataServiceClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public Service1Client(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public GetDataServiceClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(GetDataServiceClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public GetDataServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
         }
         
-        public System.Threading.Tasks.Task<string[]> GetDataAsync(int value)
+        public System.Threading.Tasks.Task<string[]> GetDataAsync()
         {
-            return base.Channel.GetDataAsync(value);
+            return base.Channel.GetDataAsync();
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -87,7 +87,7 @@ namespace ServiceReference1
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IService1))
+            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IGetDataService))
             {
                 System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
                 result.MaxBufferSize = int.MaxValue;
@@ -101,27 +101,27 @@ namespace ServiceReference1
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IService1))
+            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IGetDataService))
             {
-                return new System.ServiceModel.EndpointAddress("http://localhost:60387/Service1.svc");
+                return new System.ServiceModel.EndpointAddress("http://localhost:60387/GetDataService.svc");
             }
             throw new System.InvalidOperationException(string.Format("Не удалось найти конечную точку с именем \"{0}\".", endpointConfiguration));
         }
         
         private static System.ServiceModel.Channels.Binding GetDefaultBinding()
         {
-            return Service1Client.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IService1);
+            return GetDataServiceClient.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IGetDataService);
         }
         
         private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
         {
-            return Service1Client.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IService1);
+            return GetDataServiceClient.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IGetDataService);
         }
         
         public enum EndpointConfiguration
         {
             
-            BasicHttpBinding_IService1,
+            BasicHttpBinding_IGetDataService,
         }
     }
 }
