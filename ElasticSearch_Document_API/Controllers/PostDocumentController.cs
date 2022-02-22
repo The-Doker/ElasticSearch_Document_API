@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Net;
+using System.ServiceModel.Security;
 using System.Threading.Tasks;
 using GetTypesService = GetDataService.GetDataServiceClient;
 
@@ -27,10 +28,6 @@ namespace ElasticSearch_Document_API.Controllers
         {
             try
             {
-                _typesService.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
-                _typesService.ClientCredentials.UserName.UserName = "wcf";
-                _typesService.ClientCredentials.UserName.Password = "wcf";
-
                 var allowedTypes = await _typesService.GetDataAsync();
 
                 if (!allowedTypes.Any(System.IO.Path.GetExtension(uploadedFile.FileName).Contains))
@@ -42,9 +39,8 @@ namespace ElasticSearch_Document_API.Controllers
                     return Ok();
                 else return StatusCode((int)HttpStatusCode.InternalServerError);
             } 
-            catch (Exception ex)
+            catch
             {
-                var s = ex.Message;
                 return StatusCode((int)HttpStatusCode.InternalServerError);
             }
         }

@@ -20,7 +20,7 @@ namespace ElasticSearch_gRPC_Service
             if (request.Base64Data != null)
                 _logger.LogInformation("gRPC успешно получил файл для отправки в ElasticSearch");
             var responseFromElastic = await _elasticClient.SendFileToElasticAsync(request.Base64Data);
-            if (responseFromElastic.StatusCode == System.Net.HttpStatusCode.OK)
+            if (responseFromElastic.StatusCode == System.Net.HttpStatusCode.Created)
             {
                 _logger.LogInformation("gRPC успешно отправил файл в ElasticSearch");
                 return new UploadFileReply
