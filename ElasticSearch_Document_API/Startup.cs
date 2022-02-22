@@ -1,3 +1,4 @@
+using ElasticSearch_Document_API.Facroties;
 using ElasticSearch_Document_API.Middlewares;
 using ElasticSearch_Document_API.Services;
 using ElasticSearch_Document_API.Services.Abstraction;
@@ -10,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Net.Http;
+using System.ServiceModel;
 
 namespace ElasticSearch_Document_API
 {
@@ -38,11 +41,26 @@ namespace ElasticSearch_Document_API
             AppContext.SetSwitch(UNENCRYPTED_SWITCH_NAME, true);
             services.AddGrpcClient<DocumentHelper.DocumentHelperClient>(_ =>
             {
-                _.Address = new Uri("http://elasticgrpc:5000");
+                _.Address = new Uri(Configuration["Enviroments:GRPC_ADDRESS"]);
+            })
+            .ConfigurePrimaryHttpMessageHandler(() =>
+            {
+                var handler = new HttpClientHandler();
+                handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+                return handler;
             });
             services.AddTransient<IDocumentSaver, gRpcDocumentSaver>();
             services.AddTransient<IDocumentSearcher, gRpcDocumentSearcher>();
             services.AddTransient<IDocumentGiver, gRpcDocumentGiver>();
+            services.AddTransient( _ =>
+            {
+
+                var url = Configuration["Enviroments:GETTYPES_ADDRESS"];
+                var login = Configuration["Enviroments:GetDataServiceAccount:Login"];
+                var password = Configuration["Enviroments:GetDataServiceAccount:Password"];
+                var ignoreSsl = Convert.ToBoolean(Configuration["Enviroments:ignoreSsl"]);
+                return WcfClientFactory.CreateChannel(url, login, password, ignoreSsl);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

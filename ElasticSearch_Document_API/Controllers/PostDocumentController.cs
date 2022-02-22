@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Net;
+using System.ServiceModel.Security;
 using System.Threading.Tasks;
+using GetTypesService = GetDataService.GetDataServiceClient;
 
 namespace ElasticSearch_Document_API.Controllers
 {
@@ -15,16 +17,20 @@ namespace ElasticSearch_Document_API.Controllers
     public class PostDocumentController : ControllerBase
     {
         private readonly IDocumentSaver _documentSaver;
-        public PostDocumentController(IDocumentSaver documentSaver)
+        private readonly GetTypesService _typesService;
+        public PostDocumentController(IDocumentSaver documentSaver, GetTypesService typesService)
         {
             _documentSaver = documentSaver;
+            _typesService = typesService;
         }
 
         public async Task<IActionResult> Post([FromForm] IFormFile uploadedFile)
         {
             try
             {
-                if (!AllowedExtensions.AllowedExtensionsList.Any(System.IO.Path.GetExtension(uploadedFile.FileName).Contains))
+                var allowedTypes = await _typesService.GetDataAsync();
+
+                if (!allowedTypes.Any(System.IO.Path.GetExtension(uploadedFile.FileName).Contains))
                     return StatusCode((int)HttpStatusCode.BadRequest);
 
                 var uploadedBase64 = await FileHelper.ConvertToBase64(uploadedFile);

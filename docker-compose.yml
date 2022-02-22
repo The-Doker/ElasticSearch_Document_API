@@ -17,6 +17,12 @@ services:
     image: docker.io/ultimatedoker/elasticsearchgrpcservice
     ports:
       - "5000:5000"
+      - "5001:5001"
+    environment:
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=pwd123
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - "./Certificates:/https:ro"
     depends_on:
       - elasticsearch
     build:
@@ -33,4 +39,3 @@ services:
     build:
       context: .
       dockerfile: ElasticSearch_Document_API/Dockerfile
-  

@@ -1,0 +1,52 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "http://localhost:60387/GetDataService.svc"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, ServiceReference1"
+    ],
+    "references": [
+      "Google.Protobuf, {Google.Protobuf, 3.18.1}",
+      "Grpc.AspNetCore.Server, {Grpc.AspNetCore.Server, 2.42.0}",
+      "Grpc.AspNetCore.Server.ClientFactory, {Grpc.AspNetCore.Server.ClientFactory, 2.42.0}",
+      "Grpc.Core.Api, {Grpc.Core.Api, 2.42.0}",
+      "Grpc.Net.Client, {Grpc.Net.Client, 2.42.0}",
+      "Grpc.Net.ClientFactory, {Grpc.Net.ClientFactory, 2.42.0}",
+      "Grpc.Net.Common, {Grpc.Net.Common, 2.42.0}",
+      "Microsoft.Extensions.Configuration.Abstractions, {Microsoft.Extensions.Configuration.Abstractions, 5.0.0}",
+      "Microsoft.Extensions.DependencyInjection, {Microsoft.Extensions.DependencyInjection, 5.0.0}",
+      "Microsoft.Extensions.DependencyInjection.Abstractions, {Microsoft.Extensions.DependencyInjection.Abstractions, 5.0.0}",
+      "Microsoft.Extensions.Http, {Microsoft.Extensions.Http, 3.0.3}",
+      "Microsoft.Extensions.Logging, {Microsoft.Extensions.Logging, 5.0.0}",
+      "Microsoft.Extensions.Logging.Abstractions, {Microsoft.Extensions.Logging.Abstractions, 5.0.0}",
+      "Microsoft.Extensions.Options, {Microsoft.Extensions.Options, 5.0.0}",
+      "Microsoft.Extensions.Primitives, {Microsoft.Extensions.Primitives, 5.0.0}",
+      "Microsoft.OpenApi, {Microsoft.OpenApi, 1.2.3}",
+      "NLog, {NLog, 4.7.11}",
+      "NLog.Extensions.Logging, {NLog.Extensions.Logging, 1.7.4}",
+      "NLog.Web.AspNetCore, {NLog.Web.AspNetCore, 4.14.0}",
+      "Swashbuckle.AspNetCore.Swagger, {Swashbuckle.AspNetCore.Swagger, 5.6.3}",
+      "Swashbuckle.AspNetCore.SwaggerGen, {Swashbuckle.AspNetCore.SwaggerGen, 5.6.3}",
+      "Swashbuckle.AspNetCore.SwaggerUI, {Swashbuckle.AspNetCore.SwaggerUI, 5.6.3}",
+      "System.Reflection.DispatchProxy, {System.Reflection.DispatchProxy, 4.7.1}",
+      "System.Security.AccessControl, {System.Security.AccessControl, 4.7.0}",
+      "System.Security.Cryptography.Xml, {System.Security.Cryptography.Xml, 4.7.0}",
+      "System.Security.Permissions, {System.Security.Permissions, 4.7.0}",
+      "System.Security.Principal.Windows, {System.Security.Principal.Windows, 4.7.0}",
+      "System.ServiceModel, {System.ServiceModel.Primitives, 4.8.1}",
+      "System.ServiceModel.Duplex, {System.ServiceModel.Duplex, 4.8.1}",
+      "System.ServiceModel.Http, {System.ServiceModel.Http, 4.8.1}",
+      "System.ServiceModel.NetTcp, {System.ServiceModel.NetTcp, 4.8.1}",
+      "System.ServiceModel.Primitives, {System.ServiceModel.Primitives, 4.8.1}",
+      "System.ServiceModel.Security, {System.ServiceModel.Security, 4.8.1}",
+      "System.Windows.Extensions, {System.Windows.Extensions, 4.7.0}"
+    ],
+    "targetFramework": "net5.0",
+    "typeReuseMode": "All"
+  }
+}

@@ -3,7 +3,9 @@
     "ElasticSearch_gRPC_Service": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_Kestrel__Certificates__Default__Password": "pwd123",
+        "ASPNETCORE_Kestrel__Certificates__Default__Path": "C:\\Users\\ITQ\\.aspnet\\https\\aspnetapp.pfx"
       },
       "applicationUrl": "http://localhost:5000;https://localhost:5001",
       "dotnetRunMessages": "true"
@@ -12,7 +14,7 @@
       "commandName": "Docker",
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
-      "useSSL": false,
+      "useSSL": true,
       "httpPort": 5000,
       "sslPort": 5001
     }
