@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using TypeServiceClient = GetDataService.GetDataServiceClient;
 
@@ -6,7 +7,7 @@ namespace ElasticSearch_Document_API.Facroties
 {
     public class WcfClientFactory
     {
-        public static TypeServiceClient CreateChannel(string url, string username, string password, bool ignoreSsl)
+        public static TypeServiceClient CreateChannel(IEndpointBehavior behavior, string url, string username, string password, bool ignoreSsl)
         {
             var binding = new BasicHttpBinding()
             {
@@ -26,6 +27,7 @@ namespace ElasticSearch_Document_API.Facroties
                    RevocationMode = System.Security.Cryptography.X509Certificates.X509RevocationMode.NoCheck
                };
             }
+            client.Endpoint.EndpointBehaviors.Add(behavior);
             client.ClientCredentials.UserName.UserName = username;
             client.ClientCredentials.UserName.Password = password;
             return client;

@@ -5,6 +5,8 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using WCF_Files.Contexts;
+using WCF_Files.Models;
 
 namespace WCF_Files
 {
@@ -14,7 +16,7 @@ namespace WCF_Files
     {
         public List<string> GetData()
         {
-            return new List<string>()
+            var returnedList = new List<string>()
         {
             "doc",
             "docx",
@@ -22,6 +24,20 @@ namespace WCF_Files
             "rtf",
             "xml"
         };
+            try
+            {
+                var authDataFormContext = (ServerAuthContext)OperationContext.Current.IncomingMessageProperties["CurrentContext"];
+                var checkAuth = new AccountModel();
+                if (checkAuth.Login(authDataFormContext.userName, authDataFormContext.password))
+                {
+                    return returnedList;
+                }
+                else throw new Exception("Invalid account");
+            }
+            catch
+            {
+                throw new Exception("Unexpected error"); ;
+            }
         }
     }
 }

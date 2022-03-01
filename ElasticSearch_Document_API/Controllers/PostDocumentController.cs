@@ -39,8 +39,9 @@ namespace ElasticSearch_Document_API.Controllers
                     return Ok();
                 else return StatusCode((int)HttpStatusCode.InternalServerError);
             } 
-            catch
+            catch (Exception ex)
             {
+                var s = ex.Message;
                 return StatusCode((int)HttpStatusCode.InternalServerError);
             }
         }

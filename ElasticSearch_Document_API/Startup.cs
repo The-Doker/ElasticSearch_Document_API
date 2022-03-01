@@ -1,5 +1,7 @@
+using ElasticSearch_Document_API.Behaviors;
 using ElasticSearch_Document_API.Facroties;
 using ElasticSearch_Document_API.Middlewares;
+using ElasticSearch_Document_API.Models;
 using ElasticSearch_Document_API.Services;
 using ElasticSearch_Document_API.Services.Abstraction;
 using ElasticSearch_Document_API.Services.Implementation;
@@ -58,8 +60,9 @@ namespace ElasticSearch_Document_API
                 var url = Configuration["Enviroments:GETTYPES_ADDRESS"];
                 var login = Configuration["Enviroments:GetDataServiceAccount:Login"];
                 var password = Configuration["Enviroments:GetDataServiceAccount:Password"];
+                var authData = new AuthDataModel(login, password);
                 var ignoreSsl = Convert.ToBoolean(Configuration["Enviroments:ignoreSsl"]);
-                return WcfClientFactory.CreateChannel(url, login, password, ignoreSsl);
+                return WcfClientFactory.CreateChannel(new AuthBehavior(authData), url, login, password, ignoreSsl);
             });
         }
 

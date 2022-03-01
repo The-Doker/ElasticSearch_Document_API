@@ -72,12 +72,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\Authentication\CustomValidator.cs" />
+    <Compile Include="Behavior\AuthBehavior.cs" />
+    <Compile Include="Behavior\Extensions\AuthBehaviorExtension.cs" />
+    <Compile Include="Contexts\ServerAuthContext.cs" />
     <Compile Include="GetDataService.svc.cs">
       <DependentUpon>GetDataService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Headers\SoapAuthHeader.cs" />
     <Compile Include="IGetDataService.cs" />
+    <Compile Include="Inspectors\AuthMessageInspector.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\AuthDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
