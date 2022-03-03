@@ -1,4 +1,5 @@
 ﻿using ElasticSearch_Document_API.Services.Abstraction;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;

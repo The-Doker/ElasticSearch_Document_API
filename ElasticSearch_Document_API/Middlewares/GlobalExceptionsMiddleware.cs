@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Net;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ElasticSearch_Document_API.Middlewares

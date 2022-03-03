@@ -1,14 +1,11 @@
-﻿using ElasticSearch_Document_API.Data;
-using ElasticSearch_Document_API.Helpers;
+﻿using ElasticSearch_Document_API.Helpers;
 using ElasticSearch_Document_API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Net;
-using System.ServiceModel.Security;
 using System.Threading.Tasks;
-using GetTypesService = GetDataService.GetDataServiceClient;
 
 namespace ElasticSearch_Document_API.Controllers
 {
@@ -17,8 +14,8 @@ namespace ElasticSearch_Document_API.Controllers
     public class PostDocumentController : ControllerBase
     {
         private readonly IDocumentSaver _documentSaver;
-        private readonly GetTypesService _typesService;
-        public PostDocumentController(IDocumentSaver documentSaver, GetTypesService typesService)
+        private readonly GetDataService.IGetDataService _typesService;
+        public PostDocumentController(IDocumentSaver documentSaver, GetDataService.IGetDataService typesService)
         {
             _documentSaver = documentSaver;
             _typesService = typesService;

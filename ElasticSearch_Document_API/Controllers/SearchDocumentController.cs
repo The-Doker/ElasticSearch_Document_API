@@ -1,4 +1,5 @@
 ﻿using ElasticSearch_Document_API.Services.Abstraction;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace ElasticSearch_Document_API.Controllers
             _documentSearcher = documentSearcher;
         }
 
+        [Authorize(Roles = "apiuser")]
         public async Task<IActionResult> Post([FromForm] string searchQuery)
         {
             try

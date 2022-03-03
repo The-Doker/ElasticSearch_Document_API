@@ -1,11 +1,8 @@
 using ElasticSearch_Document_API.Controllers;
-using ElasticSearch_Document_API.Services;
 using ElasticSearch_Document_API.Services.Abstraction;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace ElasticSearch_Document_API.Tests

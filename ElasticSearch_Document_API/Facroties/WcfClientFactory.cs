@@ -7,7 +7,7 @@ namespace ElasticSearch_Document_API.Facroties
 {
     public class WcfClientFactory
     {
-        public static TypeServiceClient CreateChannel(IEndpointBehavior behavior, string url, string username, string password, bool ignoreSsl)
+        public static GetDataService.IGetDataService CreateChannel(IEndpointBehavior behavior, string url, string username, string password, bool ignoreSsl)
         {
             var binding = new BasicHttpBinding()
             {

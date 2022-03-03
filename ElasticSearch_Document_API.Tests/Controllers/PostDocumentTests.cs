@@ -15,15 +15,15 @@ namespace ElasticSearch_Document_API.Tests
         private PostDocumentController _controller;
         private IFormFile _fakeFile;
         private MemoryStream _stream;
+        private Mock<GetDataService.IGetDataService> _dataServiceClient;
 
         [SetUp]
         public void Setup()
         {
             _mockDocumentSaver = new Mock<IDocumentSaver>();
-            _controller = new PostDocumentController(_mockDocumentSaver.Object);
+            _dataServiceClient = new Mock<GetDataService.IGetDataService>();
+            _controller = new PostDocumentController(_mockDocumentSaver.Object, _dataServiceClient.Object);
             _stream = CreateStreamForFakeFile("Hello World from a Fake File");
-            
-
         }
 
         [TestCase(true)]
@@ -37,6 +37,8 @@ namespace ElasticSearch_Document_API.Tests
 
             _mockDocumentSaver.Setup(_ => _.SaveBase64Document(It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
+            _dataServiceClient.Setup(_ => _.GetDataAsync())
+                .Returns(Task.FromResult(new string[] { "pdf", "rtf" }));
 
             //Act
             var result = (StatusCodeResult) await _controller.Post(_fakeFile);

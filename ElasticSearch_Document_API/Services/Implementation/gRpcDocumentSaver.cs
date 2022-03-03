@@ -1,5 +1,4 @@
 ﻿using ElasticSearch_gRPC_Service;
-using Grpc.Net.Client;
 using System.Threading.Tasks;
 
 namespace ElasticSearch_Document_API.Services.Implementation
